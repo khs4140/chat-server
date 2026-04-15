@@ -1,17 +1,13 @@
-apiVersion: v1
-kind: Service
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: chat-ui-service
+  name: chat-ui
   namespace: chat
 spec:
+  replicas: 1
   selector:
-    app: chat-ui
-  ports:
-    - port: 8000
-      targetPort: 8000
-      nodePort: 30070
-  type: NodePort
-"deployment.yml" 47L, 944B                                                                                                                                       47,1          Bot
+    matchLabels:
+      app: chat-ui
   template:
     metadata:
       labels:
