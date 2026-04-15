@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: chat-ui-service
+  namespace: chat
+spec:
+  selector:
+    app: chat-ui
+  ports:
+    - port: 8000
+      targetPort: 8000
+      nodePort: 30070
+  type: NodePort
+"deployment.yml" 47L, 944B                                                                                                                                       47,1          Bot
+  template:
+    metadata:
+      labels:
+        app: chat-ui
+    spec:
+      containers:
+        - name: chat-ui
+          image: 158.180.85.63:30500/chat/chat-ui:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 20
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chat-ui-service
+  namespace: chat
+spec:
+  selector:
+    app: chat-ui
+  ports:
+    - port: 8000
+      targetPort: 8000
+      nodePort: 30070
+  type: NodePort
