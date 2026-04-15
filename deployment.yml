@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: chat-ui
-          image: 158.180.85.63:30500/chat/chat-ui:v1
+          image: 158.180.85.63:30500/chat/chat-ui:v2
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
